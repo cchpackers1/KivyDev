@@ -14,6 +14,8 @@ import sys
 
 
 kivy.require("1.10.1")
+from kivy.logger import LoggerHistory
+print('\n'.join([str(l) for l in LoggerHistory.history]))
 
 
 class ConnectPage(GridLayout):
@@ -294,5 +296,9 @@ def show_error(message):
     Clock.schedule_once(sys.exit, 10)
 
 if __name__ == "__main__":
+    import sys
+    sys.stderr = open('output.txt', 'w')
+    sys.stdout = sys.stderr
+
     chat_app = EpicApp()
     chat_app.run()
